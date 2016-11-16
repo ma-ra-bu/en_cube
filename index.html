@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <title>En Cube 3x3</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="styles.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div class="myframe">
+    <canvas width="300" height="300" id="canvas"></canvas>
+    <br>
+    <table  class="button_table" border="0">
+    	<tr>
+    		<td><button type="button" id="btnLs">L&#39;</button></td>
+    		<td><button type="button" id="btnMs">M&#39;</button></td>
+    		<td><button type="button" id="btnR">R </button></td>
+    		<td>&nbsp;</td>
+    		<td><button type="button" id="btnU">U </button></td>
+    		<td><button type="button" id="btnUs">U&#39;</button></td>
+    	</tr>
+    	<tr>
+	    	<td><button type="button" id="btnL">L </button></td>
+	    	<td><button type="button" id="btnM">M </button></td>
+	    	<td><button type="button" id="btnRs">R&#39;</button></td>
+	    	<td>&nbsp;</td>
+	    	<td><button type="button" id="btnE">E </button></td>
+	    	<td><button type="button" id="btnEs">E&#39;</button></td>
+	    	</tr>
+    	<tr>
+    		<td><button type="button" id="btnF">F </button></td>
+    		<td><button type="button" id="btnFs">F&#39;</button></td>
+    		<td></td>
+    		<td></td>
+    		<td><button type="button" id="btnDs">D&#39;</button><br></td>
+    		<td><button type="button" id="btnD">D</button></td>
+    	</tr>
+    	<tr>
+    		<td>&nbsp;</td>
+    		<td>&nbsp;</td>
+    		<td>&nbsp;</td>
+    		<td>&nbsp;</td>
+    		<td>&nbsp;</td>
+    		<td>&nbsp;</td>
+    	</tr>
+    	<tr>
+    		<td><button type="button" id="btnX">X </button></td>
+    		<td><button type="button" id="btnXs">X&#39;</button></td>
+    		<td>&nbsp;</td>
+    		<td>&nbsp;</td>
+    		<td><button type="button" id="btnYs">Y&#39;</button></td>
+    		<td><button type="button" id="btnY">Y</button></td>
+    	</tr>
+    </table>	 
+	 <br>
+	 <table>
+	 <tr>
+	 <td>
+    <input type="radio" name="notation" onclick="handleClick(this);" id='radio_normal' value="normal" checked>Notation normal<br>
+    <input type="radio" name="notation" onclick="handleClick(this);" value="en">Notation En
+	 </td>
+	 <td>
+    <input type="radio" name="ansicht" onclick="handleViewClick(this);" id='radio_3D' value="3D" checked>3D<br>
+    <input type="radio" name="ansicht" onclick="handleViewClick(this);" value="2D">2D
+	 </td>   
+    </tr>
+    </table>
+    <!--
+    <table border="0">
+		<tr>
+			<td><button type="button" id="btn_satz1">1 </button></td>
+			<td><button type="button" id="btn_satz2">2 </button></td>
+			<td><button type="button" id="btn_satz3">3 </button></td>
+			<td><button type="button" id="btn_satz4">4 </button></td>	
+			<td><button type="button" id="btn_satz5">5 </button></td>		
+		</tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			<td><button type="button" id="btn_satz4s">4s </button></td>	
+			<td><button type="button" id="btn_satz5s">5s </button></td>	
+		<tr>
+		</tr>    
+    </table>
+    -->
+	  </div>   
+    <script src="move.js"></script>
+  </body>
+</html>
+

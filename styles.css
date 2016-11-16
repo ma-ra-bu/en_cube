@@ -1,0 +1,20 @@
+
+.myframe {
+  width: 100%;
+  hight: 100%;
+  /*
+  background-color: lightblue;
+  */
+}
+
+
+button_table {
+  table-layout:fixed;
+  width: 100%;
+  hight: 100%;
+}
+
+canvas{
+	outline: 1px dotted #ccc;
+	background-color: lightgray;
+}
