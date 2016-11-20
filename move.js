@@ -2,28 +2,30 @@
 Zauberwürfel:
 
                         top1    top2    top3
-
+                          0       1       2
                         top4    top5    top6
-
+                          3       4       5
                         top7    top8    top9
-
+                          6       7       8
 left1   left2   left3   front1  front2  front3  right1  right2  right3  back1   back2   back3
-
+  9      10      11      18      19      20      27      28      29      36      37      38
 left4   left5   left6   front4  front5  front6  right4  right5  right6  back4   back5   back6
-
+ 12      13      14      21      22      23      30      31      32      39      40      41
 left7   left8   left9   front7  front8  front9  right7  right8  right9  back7   back8   back9
-
+ 15      16      17      24      25      26      33      34      35      42      43      44
                         bottom1 bottom2 bottom3
-
+                         45      46      47
                         bottom4 bottom5 bottom6
-
+                         48      49      50
                         bottom7 bottom8 bottom9
-                        
+                         51      52      53
+
+Zahle 0 bis 53 sind Indexe des Arrays v54[]                        
 
 
         1:schwarz
         
-2:grün  3:rot     4:blau   4:orange
+2:grün  3:rot     4:blau   5:orange
 
         6:gelb        
 
@@ -684,10 +686,12 @@ function handleViewClick(myRadio) {
 }
 showCanvas();
 
+/*
 // Saetze
 var satz1 = function(){
 	 f_shift();d();f();d();f_shift();d();d();f();
 }
+
 
 var buttonS1 = document.querySelector('#btn_satz1');
   btn_satz1.addEventListener('click',function(){
@@ -753,3 +757,56 @@ var buttonS5s = document.querySelector('#btn_satz5s');
 	 satz5s();
     showCanvas();
 });
+
+*/
+
+var solve = function(){
+	window.alert('solve - noch nicht programmiert')
+};
+
+
+function gup( name, url ) {
+    if (!url) url = location.href;
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( url );
+    return results == null ? null : results[1];
+}
+
+var queryString=gup('farben');
+if (queryString){
+  var v54=queryString.split('_');
+  m1 = v54[4];
+  m2 = v54[13];
+  m3 = v54[22];
+  m4 = v54[31];
+  m5 = v54[40];
+  m6 = v54[49];
+  //Kanten
+  k12 = new Array(v54[3],v54[10]);
+  k13 = new Array(v54[7],v54[19]);
+  k14 = new Array(v54[5],v54[28]);
+  k15 = new Array(v54[1],v54[37]);
+  k23 = new Array(v54[14],v54[21]);
+  k34 = new Array(v54[23],v54[30]);
+  k45 = new Array(v54[32],v54[39]);
+  k52 = new Array(v54[41],v54[12]);
+  k62 = new Array(v54[48],v54[16]);
+  k63 = new Array(v54[46],v54[25]);
+  k64 = new Array(v54[50],v54[34]);
+  k65 = new Array(v54[52],v54[43]);
+  //Ecken
+  e123 = new Array(v54[6],v54[11],v54[18]);
+  e134 = new Array(v54[8],v54[20],v54[27]);
+  e145 = new Array(v54[2],v54[29],v54[36]);
+  e125 = new Array(v54[0],v54[9],v54[38]);
+  e623 = new Array(v54[45],v54[17],v54[24]);
+  e634 = new Array(v54[47],v54[26],v54[33]);
+  e645 = new Array(v54[53],v54[35],v54[42]);
+  e625 = new Array(v54[51],v54[15],v54[44]);
+ 
+  showCanvas();
+}
+
+
