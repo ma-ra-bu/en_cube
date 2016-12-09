@@ -5,26 +5,32 @@ td {
 }
 
 .top {
+  background-color:black;
   border: 1px solid black;
 }
 
 .left {
+  background-color:green;
   border: 1px solid black;
 }
 
 .front {
+  background-color:red;
   border: 1px solid black;
 }
 
 .right {
+  background-color:blue;
   border: 1px solid black;
 }
 
 .back {
+  background-color:orange;
   border: 1px solid black;
 }
 
 .bottom {
+  background-color:yellow;
   border: 1px solid black;
 }
 
@@ -56,26 +62,3 @@ td {
   background-color:yellow;
 }
 
-#top5 {
-  background-color:black;
-}
-
-#left5 {
-  background-color:green;
-}
-
-#front5 {
-  background-color:red;
-}
-
-#right5 {
-  background-color:blue;
-}
-
-#back5 {
-  background-color:orange;
-}
-
-#bottom5 {
-  background-color:yellow;
-}

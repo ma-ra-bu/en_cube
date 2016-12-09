@@ -1,15 +1,38 @@
 var arrColors =[];
+var fdata=''
 
 for (var i=0; i<54;i++){
-  arrColors.push("white")
+  if(i>=0 && i<9) {
+    arrColors.push("black");
+    fdata=fdata+"black";
+  }
+  if(i>=9 && i<18) {
+	 arrColors.push("green");
+    fdata=fdata+"green";
+  }
+  if(i>=18 && i<27) {
+	 arrColors.push("red");
+    fdata=fdata+"red";
+  }
+  if(i>=27 && i<36) {
+	 arrColors.push("blue");
+    fdata=fdata+"blue";
+  }
+  if(i>=36 && i<45) {
+	 arrColors.push("orange");
+    fdata=fdata+"orange";
+  }
+  if(i>=45) {
+	 arrColors.push("yellow");
+    fdata=fdata+"yellow";
+  }
+  if (i<53) {
+  	fdata=fdata+'_';
+  }
 }
 
-arrColors[4]="black";
-arrColors[13]="green";
-arrColors[22]="red";
-arrColors[31]="blue";
-arrColors[40]="orange";
-arrColors[49]="yellow";
+var form_data=document.getElementById('kunterbunt');
+form_data.value=fdata;
 
 var rgb2color=function(rgb){
 	switch(rgb){
@@ -101,8 +124,9 @@ var farbe_uebernehmen=function () {
   arrColors[arrInd]=rgb2color(aktuelle_Farbe);
   this.style.background=aktuelle_Farbe;
   //alert(arrColors);
-  var fdata=''
   arrLen=arrColors.length;
+  //var fdata='';
+  fdata='';
   for (i = 0; i < arrLen; i++) {
     fdata=fdata+arrColors[i]+"_";
   }
@@ -254,4 +278,3 @@ bottom8.addEventListener('click',farbe_uebernehmen);
 
 var bottom9=document.getElementById('bottom9');
 bottom9.addEventListener('click',farbe_uebernehmen);
-
