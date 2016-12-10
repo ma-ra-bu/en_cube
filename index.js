@@ -71,6 +71,10 @@ var e625 = new Array(m6, m2, m5);
 
 var solution="";
 var notation = 'standard';
+var v54 = [];
+var eerror=false;
+var eerror_count=0;
+var eerror_max=200;
 
 // Manipulationen
 
@@ -782,9 +786,40 @@ function gup( name, url ) {
     return results == null ? null : results[1];
 }
 
-var queryString=gup('farben');
-if (queryString){
-  var v54=queryString.split('_');
+var backup_state='';
+
+var state2arr = function () {
+  v54[4]=m1;
+  v54[13]=m2;
+  v54[22]=m3;
+  v54[31]=m4;
+  v54[40]=m5;
+  v54[49]=m6;
+  //Kanten
+  v54[3]=k12[0];v54[10]=k12[1];
+  v54[7]=k13[0];v54[19]=k13[1];
+  v54[5]=k14[0];v54[28]=k14[1];
+  v54[1]=k15[0];v54[37]=k15[1];
+  v54[14]=k23[0];v54[21]=k23[1];
+  v54[23]=k34[0];v54[30]=k34[1];
+  v54[32]=k45[0];v54[39]=k45[1];
+  v54[41]=k52[0];v54[12]=k52[1];
+  v54[48]=k62[0];v54[16]=k62[1];
+  v54[46]=k63[0];v54[25]=k63[1];
+  v54[50]=k64[0];v54[34]=k64[1];
+  v54[52]=k65[0];v54[43]=k65[1];
+  //Ecken
+  v54[6]=e123[0];v54[11]=e123[1];v54[18]=e123[2];
+  v54[8]=e134[0];v54[20]=e134[1];v54[27]=e134[2];
+  v54[2]=e145[0];v54[29]=e145[1];v54[36]=e145[2];
+  v54[0]=e125[0];v54[9]=e125[1];v54[38]=e125[2];
+  v54[45]=e623[0];v54[17]=e623[1];v54[24]=e623[2];
+  v54[47]=e634[0];v54[26]=e634[1];v54[33]=e634[2];
+  v54[53]=e645[0];v54[35]=e645[1];v54[42]=e645[2];
+  v54[51]=e625[0];v54[15]=e625[1];v54[44]=e625[2];  
+}
+
+var arr2state = function (v54) {
   m1 = v54[4];
   m2 = v54[13];
   m3 = v54[22];
@@ -812,19 +847,17 @@ if (queryString){
   e623 = new Array(v54[45],v54[17],v54[24]);
   e634 = new Array(v54[47],v54[26],v54[33]);
   e645 = new Array(v54[53],v54[35],v54[42]);
-  e625 = new Array(v54[51],v54[15],v54[44]);
- 
+  e625 = new Array(v54[51],v54[15],v54[44]);  
+}
+
+
+var queryString=gup('farben');
+if (queryString){  
+  v54=queryString.split('_');
+  arr2state(v54); 
   showCanvas();
 }
 
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
 
 var black_top_red_front = function(){
 	switch(m1) {
@@ -1096,7 +1129,8 @@ var corner_top_left=function(c1,c2,c3){ // c1=black c2=green c3=red
 
 var kreuz_unten =function(c1){
   // gelbes Kreuz erstellen
-  while(k12[0] != c1 || k13[0] != c1 || k14[0] != c1 || k15[0] != c1){
+  while((k12[0] != c1 || k13[0] != c1 || k14[0] != c1 || k15[0] != c1)&& !eerror){
+  	 eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
   		
     if (k12[0] != c1 && k13[0] != c1 && k14[0] != c1 && k15[0] != c1) {
     	f();r();u();r_shift();u_shift();f_shift();
@@ -1112,13 +1146,15 @@ var kreuz_unten =function(c1){
     
     if (k12[0] != c1 || k13[0] != c1 || k14[0] != c1 || k15[0] != c1) {
     	u();
-    }    
+    }  
   }
   
   // Farben des Kreuzes ausrichten
   var richtigeFarben=0;
-  while (richtigeFarben<2){
-  	 while (richtigeFarben <2){
+  while ((richtigeFarben<2)&& !eerror){
+  	 eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
+  	 while ((richtigeFarben <2&& !eerror)){
+  	   eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
   	 	richtigeFarben=0;
   	 	if(k12[1]==m2){richtigeFarben++;};
   	 	if(k13[1]==m3){richtigeFarben++;};
@@ -1128,7 +1164,8 @@ var kreuz_unten =function(c1){
     }  
     //alert(richtigeFarben);
     if (richtigeFarben==2) {
-    	while(k15[1]!=m5){
+    	while((k15[1]!=m5)&& !eerror){
+  	     eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
     	  y();
     	}
     	if (k12[1]==m2) {
@@ -1144,7 +1181,8 @@ var corner_down= function(){
   // Ist eine Kante bereits am rechten Ort? Wenn nicht, dann ausrichten!
   var corner_place = false;
   var int_corner_place=0;
-  while (!corner_place){
+  while ((!corner_place)&& !eerror){
+  	 eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
     if(e134.indexOf(m1)>=0 && e134.indexOf(m3)>=0 && e134.indexOf(m4)>=0){
     	corner_place=true;
     } else {     
@@ -1157,18 +1195,20 @@ var corner_down= function(){
     }
   }
   // Alle Kanten an den rechten Ort bringen!
-  while (!((e123.indexOf(m1)>=0 && e123.indexOf(m2)>=0 && e123.indexOf(m3)>=0)&&
+  while ((!((e123.indexOf(m1)>=0 && e123.indexOf(m2)>=0 && e123.indexOf(m3)>=0)&&
            (e134.indexOf(m1)>=0 && e134.indexOf(m3)>=0 && e134.indexOf(m4)>=0)&&
            (e145.indexOf(m1)>=0 && e145.indexOf(m4)>=0 && e145.indexOf(m5)>=0)&&
            (e125.indexOf(m1)>=0 && e125.indexOf(m2)>=0 && e125.indexOf(m5)>=0)))
-  {
+           && !eerror){
+  	 eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
     u();r();u_shift();l_shift();u();r_shift();u_shift();l();    
     solution=solution+"\n";
   }
   // Die Kanten richtig drehen!
   var solved=false;
   test_solved=0;
-  while(!solved && e134[0] == m1){
+  while((!solved && e134[0] == m1)&& !eerror){
+  	eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
   	y();
   	test_solved++;
   	if (test_solved==5){
@@ -1177,8 +1217,10 @@ var corner_down= function(){
   	}
   	  
   }  
-  while (!solved){
-    while (e134[0]!=m1){
+  while ((!solved)&& !eerror){
+  	 eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
+    while ((e134[0]!=m1)&& !eerror){
+  	   eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
       r_shift();d_shift();r();d();      
       solution=solution+"\n";
     }
@@ -1186,11 +1228,13 @@ var corner_down= function(){
     u();
     solved=e123[0]==m1 && e134[0]==m1 && e145[0]==m1 && e125[0]==m1;
   }
-  while (k12[1]!=m2){
+  while ((k12[1]!=m2)&& !eerror){
+  	 eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
     u();  
   }
   x();x();
-  while (m3!='red'){
+  while ((m3!='red')&& !eerror){
+  	eerror_count++;if (eerror_count>eerror_max) {eerror=true;}
   	y();
   }
 }
@@ -1244,7 +1288,14 @@ var simplified = function(s){
   return s;
 }
 
+var save_state = function(){
+	
+}
+
 var solve=function(c1,c2) {
+  eerror_count=0;
+  state2arr();
+  var v54_bak=v54.slice(0);
   solution="1. WUERFEL AUSRICHTEN\n\n";
   if (!(m1 == 'black' && m3 == 'red')){
     black_top_red_front();
@@ -1287,6 +1338,14 @@ var solve=function(c1,c2) {
   if (notation=='en'){
      mySolution=en_solution(mySolution);  
   }
-  alert(mySolution);
+  if (!eerror){
+    alert(mySolution);
+    //alert(eerror_count);
+  }else{
+    alert('Für diesen Würfel gibt es keine Lösung!');
+    //alert(eerror_count);
+    eerror=false;
+  }
+  arr2state(v54_bak);
   showCanvas();
 }
