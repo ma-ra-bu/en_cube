@@ -70,11 +70,11 @@ var e645 = new Array(m6, m4, m5);
 var e625 = new Array(m6, m2, m5);
 
 var solution="";
-var notation = 'standard';
+var notation = 'en';
 var v54 = [];
 var eerror=false;
 var eerror_count=0;
-var eerror_max=200;
+var eerror_max=300;
 
 // Manipulationen
 
@@ -453,54 +453,62 @@ var buttonYs = document.querySelector('#btnYs');
     showCanvas();
 });
 
+function en_notation(){
+	buttonLs.innerHTML='L&#8593;';
+	buttonMs.innerHTML='M&#8593;';
+	buttonR.innerHTML='R&#8593;';
+	buttonL.innerHTML='L&#8595;';
+	buttonM.innerHTML='M&#8595;';
+	buttonRs.innerHTML='R&#8595;';
+	buttonUs.innerHTML='O&#8594;';
+	buttonEs.innerHTML='M&#8594;';
+	buttonD.innerHTML='U&#8594;';
+	buttonU.innerHTML='O&#8592;';
+	buttonE.innerHTML='M&#8592;';
+	buttonDs.innerHTML='U&#8592;';
+	buttonF.innerHTML='&#8635;';
+	buttonFs.innerHTML='&#8634;';
+	buttonX.innerHTML='W&#8593;';
+	buttonXs.innerHTML='W&#8595;';
+	buttonY.innerHTML='W&#8594;';
+	buttonYs.innerHTML='W&#8592;';
+}
+
+function normal_notation() {
+	buttonLs.innerHTML='L&#39;';
+	buttonMs.innerHTML='M&#39;';
+	buttonR.innerHTML='R ';
+	buttonL.innerHTML='L ';
+	buttonM.innerHTML='M ';
+	buttonRs.innerHTML='R&#39;';
+	buttonUs.innerHTML='U&#39;';
+	buttonEs.innerHTML='E&#39;';
+	buttonD.innerHTML='D ';
+	buttonU.innerHTML='U ';
+	buttonE.innerHTML='E ';
+	buttonDs.innerHTML='D&#39;';
+	buttonF.innerHTML='F ';
+	buttonFs.innerHTML='F&#39;';
+	buttonX.innerHTML='X ';
+	buttonXs.innerHTML='X&#39;';
+	buttonY.innerHTML='Y ';
+	buttonYs.innerHTML='Y&#39;';	
+}
+
 //Notation
 function handleClick(myRadio) {
 	if (myRadio.value == 'en'){
 		notation='en';
-	   buttonLs.innerHTML='L&#8593;';
-	   buttonMs.innerHTML='M&#8593;';
-	   buttonR.innerHTML='R&#8593;';
-	   buttonL.innerHTML='L&#8595;';
-	   buttonM.innerHTML='M&#8595;';
-	   buttonRs.innerHTML='R&#8595;';
-	   buttonUs.innerHTML='O&#8594;';
-	   buttonEs.innerHTML='M&#8594;';
-	   buttonD.innerHTML='U&#8594;';
-	   buttonU.innerHTML='O&#8592;';
-	   buttonE.innerHTML='M&#8592;';
-	   buttonDs.innerHTML='U&#8592;';
-	   buttonF.innerHTML='&#8635;';
-	   buttonFs.innerHTML='&#8634;';
-	   buttonX.innerHTML='W&#8593;';
-	   buttonXs.innerHTML='W&#8595;';
-	   buttonY.innerHTML='W&#8594;';
-	   buttonYs.innerHTML='W&#8592;';
+	   en_notation();
 	}
 	else {
 		notation='standard';
-		buttonLs.innerHTML='L&#39;';
-	   buttonMs.innerHTML='M&#39;';
-		buttonR.innerHTML='R ';
-		buttonL.innerHTML='L ';
-		buttonM.innerHTML='M ';
-		buttonRs.innerHTML='R&#39;';
-	   buttonUs.innerHTML='U&#39;';
-	   buttonEs.innerHTML='E&#39;';
-	   buttonD.innerHTML='D ';
-	   buttonU.innerHTML='U ';
-	   buttonE.innerHTML='E ';
-	   buttonDs.innerHTML='D&#39;';
-	   buttonF.innerHTML='F ';
-	   buttonFs.innerHTML='F&#39;';
-	   buttonX.innerHTML='X ';
-	   buttonXs.innerHTML='X&#39;';
-	   buttonY.innerHTML='Y ';
-	   buttonYs.innerHTML='Y&#39;';
+		normal_notation();
 	}
 }
 
 // 2 Ansichten
-document.getElementById('radio_normal').checked=true;
+document.getElementById('radio_en').checked=true;
 document.getElementById('radio_3D').checked=true;
 
 var rombus_oben=function(c,co,x,y){
@@ -1142,11 +1150,12 @@ var kreuz_unten =function(c1){
     
     if (k12[0] == c1 && k13[0] != c1 && k14[0] == c1 && k15[0] != c1) {
     	f();r();u();r_shift();u_shift();f_shift();
+      solution=solution+"\n"; 
     }
     
     if (k12[0] != c1 || k13[0] != c1 || k14[0] != c1 || k15[0] != c1) {
     	u();
-    }  
+    }     
   }
   
   // Farben des Kreuzes ausrichten
@@ -1172,8 +1181,9 @@ var kreuz_unten =function(c1){
     		y_shift();
     	}
     	r();u();r_shift();u();r();u();u(),r_shift();
+      solution=solution+"\n";
     	richtigeFarben=0;
-    }
+    }    
  }
 }
 
@@ -1282,7 +1292,10 @@ var simplified = function(s){
     s=s.replace(/x x x/g,"x'");
     s=s.replace(/u' e' d/g,"y");
     s=s.replace(/y y y/g,"y'");
-    s=s.replace(/u' u' u'/g,"u");
+    s=s.replace(/u' u' u'/g,"u");    
+    s=s.replace(/y \ny \ny \ny \n/g,"");
+    s=s.replace(/f f'/g,"")
+    s=s.replace(/f' f/g,"")
     i=s.length;
   }  
   return s;
@@ -1349,3 +1362,5 @@ var solve=function(c1,c2) {
   arr2state(v54_bak);
   showCanvas();
 }
+
+en_notation();
